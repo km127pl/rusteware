@@ -1,4 +1,4 @@
-Rusteware
+![Rusteware - A warehouse inventory managment software](assets/thumbnail.png)
 =========
 
 A warehouse inventory management software that helps you keep track of your inventory levels, orders, and generate reports. The software is built with Rust and uses a MySQL database to store data. With Rusteware, you can:
