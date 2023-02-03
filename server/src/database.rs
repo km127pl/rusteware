@@ -1,9 +1,7 @@
-use serde_derive::Deserialize;
 use mysql::*;
 use mysql::prelude::*;
 
 use crate::config::Config;
-use mysql::*;
 
 #[derive(Debug)]
 pub struct Product {
@@ -50,7 +48,7 @@ pub fn get_product_by_id(db: &Pool, id: i32) -> Product {
         stock: 0
     };
 
-    let mut result = conn.exec_iter("SELECT * FROM products WHERE id = :id", params! {
+    let result = conn.exec_iter("SELECT * FROM products WHERE id = :id", params! {
         "id" => id
     }).unwrap();
 
@@ -80,11 +78,11 @@ pub fn create_product(db: &Pool, name: &str, description: &str, stock: i32) {
 // get last inserted id
 pub fn get_last_insert_id(db: &Pool) -> i32 {
     let mut conn = get_conn(db);
-    let mut result = conn.exec_iter("SELECT `id` FROM `products` ORDER BY id DESC LIMIT 1", ()).unwrap();
+    let result = conn.exec_iter("SELECT `id` FROM `products` ORDER BY id DESC LIMIT 1", ()).unwrap();
     let mut _id: i32 = 0;
 
     for row in result {
-        let (id) : i32 = from_row(row.unwrap());
+        let id : i32 = from_row(row.unwrap());
         _id = id;
     }
 
@@ -117,7 +115,7 @@ pub fn get_all_products(db: &Pool) -> Vec<Product> {
     let mut conn = get_conn(db);
     let mut products: Vec<Product> = Vec::new();
 
-    let mut result = conn.exec_iter("SELECT * FROM products", ()).unwrap();
+    let result = conn.exec_iter("SELECT * FROM products", ()).unwrap();
 
     for row in result {
         let (id, name, description, stock) = from_row(row.unwrap());

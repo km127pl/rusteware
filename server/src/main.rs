@@ -1,5 +1,5 @@
 use crate::config::{Config, load_config};
-use crate::database::{db_connect, get_conn, Product};
+use crate::database::{db_connect, Product};
 
 pub mod config;
 mod database;
@@ -14,7 +14,7 @@ fn main() {
     println!("DEBUG: Connected to database");
 
     // get all products
-    let mut products : Vec<Product> = database::get_all_products(&db);
+    let products: Vec<Product> = database::get_all_products(&db);
 
     for product in products {
         println!("DEBUG: Product: {:?}", product);
