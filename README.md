@@ -21,12 +21,14 @@ Getting Started
 3. Set up the MySQL database:
    create a database and import the schema from the `server/schema.sql` file
 
-4. Update the database configuration in the `server/config.toml` file
+4. Copy the config file `server/config.toml.example` into `server/config.toml`
 
-5. Start the server:
+5. Update the database configuration in the `server/config.toml` file
+
+6. Start the server:
    cargo run
 
-6. Use the API endpoints to access the data stored in the database.
+7. Use the API endpoints to access the data stored in the database, or setup the client.
 
 API Endpoints
 -------------
