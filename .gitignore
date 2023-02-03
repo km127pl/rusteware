@@ -5,3 +5,9 @@ server/Cargo.lock
 server/config.toml
 server/Cargo.lock
 server/Cargo.lock
+server/target/*
+server/target/debug/*
+server/target/debug/build/*
+*.ll
+*.h
+*.a
