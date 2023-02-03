@@ -1,1 +1,7 @@
+.idea/**/*
+server/config.toml
+.gitignore
+server/Cargo.lock
+server/config.toml
+server/Cargo.lock
 server/Cargo.lock
