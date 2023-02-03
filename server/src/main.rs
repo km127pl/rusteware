@@ -1,8 +1,9 @@
-use crate::config::load_config;
+use crate::config::{Config, load_config};
 
 pub mod config;
 
 fn main() {
-    let conf = load_config("config.toml");
-    println!("Hello, {:#?}", conf);
+    let conf: Config = load_config("config.toml");
+    println!("DEBUG: Running on version {}", conf.rusteware.version);
+
 }
