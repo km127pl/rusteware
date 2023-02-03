@@ -1,6 +1,5 @@
-use mysql::PooledConn;
 use crate::config::{Config, load_config};
-use crate::database::{db_connect, get_conn};
+use crate::database::{create_product, db_connect, get_conn};
 
 pub mod config;
 mod database;
@@ -14,10 +13,13 @@ fn main() {
 
     println!("DEBUG: Connected to database");
 
+    println!("DEBUG: Creating test product");
+
+    create_product(&db, "Test Product", "This is a test product", 10);
+
     let mut prod = database::get_product_by_id(&db, 1);
 
     println!("DEBUG: Product: {:?}", prod);
-
 
 
 }
