@@ -1,5 +1,5 @@
 use crate::config::{Config, load_config};
-use crate::database::{create_product, db_connect, get_conn};
+use crate::database::{db_connect, get_conn, Product};
 
 pub mod config;
 mod database;
@@ -9,17 +9,14 @@ fn main() {
     println!("DEBUG: Running on version {}", conf.rusteware.version);
 
     let db = db_connect(conf);
-    let conn = get_conn(&db);
+    // let conn = get_conn(&db);
 
     println!("DEBUG: Connected to database");
 
-    println!("DEBUG: Creating test product");
+    // get all products
+    let mut products : Vec<Product> = database::get_all_products(&db);
 
-    create_product(&db, "Test Product", "This is a test product", 10);
-
-    let mut prod = database::get_product_by_id(&db, 1);
-
-    println!("DEBUG: Product: {:?}", prod);
-
-
+    for product in products {
+        println!("DEBUG: Product: {:?}", product);
+    }
 }
