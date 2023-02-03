@@ -1,3 +1,8 @@
+use crate::config::load_config;
+
+pub mod config;
+
 fn main() {
-    println!("Hello, world!");
+    let conf = load_config("config.toml");
+    println!("Hello, {:#?}", conf);
 }
