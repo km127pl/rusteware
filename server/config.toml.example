@@ -7,3 +7,8 @@ port = 3306
 name = 'rusteware'
 user = 'admin'
 password = ''
+
+[webserver]
+host = 'localhost'
+port = 8080
+secret = 'changemeplease123!' # this is used for future session encryption

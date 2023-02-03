@@ -8,6 +8,9 @@ edition = "2021"
 [dependencies]
 colored = "2.0.0"
 mysql = "23.0.1"
+polling = "2.5.2"
 serde = "1.0.152"
 serde_derive = "1.0.152"
+tokio = { version = "1", features = ["full"] }
 toml = "0.7.1"
+warp = "0.3.3"

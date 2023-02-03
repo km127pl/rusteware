@@ -1,22 +1,32 @@
 use crate::config::{Config, load_config};
 use crate::database::{db_connect, Product};
+use crate::webserver::start_webserver;
+use std::thread;
+use warp::Filter;
 
-pub mod config;
+mod config;
 mod database;
+mod webserver;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let conf: Config = load_config("config.toml");
     println!("DEBUG: Running on version {}", conf.rusteware.version);
 
-    let db = db_connect(conf);
-    // let conn = get_conn(&db);
+    // start the webserver on another thread
+    let server_future = Box::pin(async move {
+        start_webserver(&conf).await;
+    });
 
-    println!("DEBUG: Connected to database");
+    thread::spawn(move || {
+        tokio::runtime::Builder::new_multi_thread()
+            .enable_all()
+            .build()
+            .unwrap()
+            .block_on(server_future);
+    });
 
-    // get all products
-    let products: Vec<Product> = database::get_all_products(&db);
-
-    for product in products {
-        println!("DEBUG: Product: {:?}", product);
+    loop {
+        thread::sleep(std::time::Duration::from_secs(1));
     }
 }

@@ -8,6 +8,7 @@ use toml;
 pub struct Config {
     pub rusteware: RustewareConfig,
     pub database: DatabaseConfig,
+    pub webserver: WebserverConfig
 }
 
 #[derive(Deserialize, Debug)]
@@ -22,6 +23,13 @@ pub struct DatabaseConfig {
 #[derive(Deserialize, Debug)]
 pub struct RustewareConfig {
     pub version: String
+}
+
+#[derive(Deserialize, Debug)]
+pub struct WebserverConfig {
+    pub host: String,
+    pub port: u16,
+    pub secret: String
 }
 
 // loads a config from a .toml file

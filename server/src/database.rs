@@ -1,14 +1,22 @@
+use serde_derive::Serialize;
+use serde_derive::Deserialize;
 use mysql::*;
 use mysql::prelude::*;
 
 use crate::config::Config;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Product {
     pub(crate) id: i32,
     pub name: String,
     pub description: String,
     pub stock: i32
+}
+
+impl Product {
+    pub fn as_json(&self) -> String {
+        return serde_json::to_string(self).unwrap();
+    }
 }
 
 #[derive(Debug)]
@@ -20,7 +28,7 @@ pub struct Order {
    pub product: Product
 }
 
-pub fn db_connect(config: Config) -> Pool {
+pub fn db_connect(config: &Config) -> Pool {
     println!("DEBUG: Connecting to database: mysql://{}:{}@{}:{}/{}", config.database.user, config.database.password, config.database.host, config.database.port, config.database.name);
     let pool = Pool::new(&*format!(
         "mysql://{}:{}@{}:{}/{}",
